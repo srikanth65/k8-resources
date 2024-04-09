@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -19,3 +20,19 @@ spec:
             configMapKeyRef:
               name: devops-config           # The ConfigMap this value comes from.
               key: trainer
+
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-pod-A1
+spec: 
+  containers:
+    - name: config-pod-A1
+      image: nginx 
+      ports: 
+        - containerPort: 80
+      envFrom:
+        - configMapRef:
+            name: devops-config
