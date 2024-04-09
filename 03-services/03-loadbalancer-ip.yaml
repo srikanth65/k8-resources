@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-lb
+  labels:
+    app: nginx-lbservice
+    demo: lb-node
+spec:
+  containers:
+  - name: nginx-lb
+    image: nginx
+    ports:
+      - containerPort: 80
+        name: http-web-svc-lbport
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-lb-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx-lbservice
+    demo: lb-node
+  ports:
+  - name: name-of-lb-service-port
+    protocol: TCP
+    port: 80     # service port 
+    targetPort: http-web-svc-lbport  # container port
+    nodePort: 30008 # node port
