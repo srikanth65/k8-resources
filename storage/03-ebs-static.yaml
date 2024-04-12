@@ -13,7 +13,7 @@ spec:
     driver: ebs.csi.aws.com
     fsType: ext4
     volumeHandle: vol-03c604538dd7d2f41 # give your volume ID creaed in aws, it needs to be same AZ as pod. 
-    
+
 --- 
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -43,7 +43,7 @@ spec:
     - name: nginx-data
       mountPath: /usr/share/nginx/html
   nodeSelector:
-    zone: 1b # change these details as required 
+    zone: 1b # change these details as required kubectl label ALB_DNS_NAME zone=1b
   volumes:
   - name: nginx-data
     persistentVolumeClaim:
